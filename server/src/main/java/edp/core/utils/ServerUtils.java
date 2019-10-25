@@ -80,7 +80,7 @@ public class ServerUtils {
     }
 
     public String getLocalHost() {
-        return protocol + PROTOCOL_SEPARATOR + "localhost:" + port;
+        return protocol + PROTOCOL_SEPARATOR + address + ":" + port;
     }
 
     public String getBasePath() {

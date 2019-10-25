@@ -20,14 +20,37 @@ file:
   phantomJs-path: ${DAVINCI3_HOME}/bin/phantom.js
   base-path: ${DAVINCI3_HOME}/lib/
 
+server:
+  protocol: http
+  address: 30.18.122.27
+  port: 8080
 
+  access:
+    address: 30.18.122.27
+    port: 8080
 spring:
   servlet:
     multipart:
       max-request-size: 1024MB
       max-file-size: 1024MB
       enabled: true
+  mail:
+      host: smtp.163.com
+      port: 465
+      username: lyylyy20@163.com
+      password: Stupid12345
+      nickname: Davinci
 
+      properties:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+          auth: true
+        mail:
+          smtp:
+            ssl:
+              enable: true
   config:
     location: classpath:/
     additional-location: file:${DAVINCI3_HOME}/config/
@@ -44,6 +67,14 @@ spring:
     break-after-acquire-failure: true
     connection-error-retry-attempts: 3
     validation-query: SELECT 1
+    url: jdbc:mysql://localhost:3306/davinci?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: lyy
+    password: stupid22
+    driver-class-name: com.mysql.jdbc.Driver
+    initial-size: 2
+    min-idle: 1
+    max-wait: 60000
+    max-active: 10
 
   resources:
     static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, file:${file.userfiles-path}, file:${file.web_resources}
@@ -68,7 +99,33 @@ spring:
   cache:
     caffeine:
       type: caffeine
+  ldap:
+    urls:
+    username:
+    password:
+    base:
+    domainName:    # domainName 指 企业邮箱后缀，如企业邮箱为：xxx@example.com, 这里值为 '@example.com'
+## please choose either of the two ways
+  redis:
+    isEnable: true
 
+  ## standalone config
+    host: 127.0.0.1
+    port: 6379
+
+  ## cluster config
+  #  cluster:
+  #       nodes:
+
+    password:
+    database: 0
+    timeout: 1000
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: 1
+        max-idle: 8
+        min-idle: 0
 
 logging:
   config: file:${DAVINCI3_HOME}/config/logback.xml
@@ -103,3 +160,13 @@ mapper:
 sql_template_delimiter: $
 
 custom-datasource-driver-path: ${DAVINCI3_HOME}/config/datasource_driver.yml
+jwtToken:
+  secret: secret
+  timeout: 1800000
+  algorithm: HS512
+screenshot:
+  default_browser: PHANTOMJS                    # PHANTOMJS or CHROME
+  timeout_second: 600
+  phantomjs_path: /Users/liangyayong/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs
+  chromedriver_path: $your_chromedriver_path$
+
